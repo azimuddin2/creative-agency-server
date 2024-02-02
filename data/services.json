@@ -1,0 +1,32 @@
+[
+    {
+        "image": "https://i.ibb.co/NKphj1m/service1.png",
+        "name": "Web & Mobile Design",
+        "price": 300,
+        "description": "We craft stunning and amazing web UI, using a well drrafted UX to fit your product."
+    },
+    {
+        "image": "https://i.ibb.co/8NDMq0r/service2.png",
+        "name": "Graphic Design",
+        "price": 200,
+        "description": "Amazing flyers, social media posts and brand representations that would make your brand stand out."
+    },
+    {
+        "image": "https://i.ibb.co/121TdRq/service3.png",
+        "name": "Web Development",
+        "price": 500,
+        "description": "With well written codes, we build amazing apps for all platforms, mobile and web apps in general."
+    },
+    {
+        "image": "https://i.ibb.co/nj6PkC8/service4.png",
+        "name": "Content Writer",
+        "price": 100,
+        "description": "With well written codes, we build amazing apps for all platforms, mobile and web apps in general."
+    },
+    {
+        "image": "https://i.ibb.co/RhhqKpW/service5.png",
+        "name": "UI/UX Design",
+        "price": 250,
+        "description": "With well written codes, we build amazing apps for all platforms, mobile and web apps in general."
+    }
+]
