@@ -23,11 +23,28 @@ const client = new MongoClient(uri, {
 async function run() {
     try {
         const servicesCollection = client.db('creativeAgency').collection('services');
+        const usersCollection = client.db('creativeAgency').collection('users');
 
+        // services related api
         app.get('/services', async (req, res) => {
             const query = {};
             const services = await servicesCollection.find(query).toArray();
             res.send(services);
+        });
+
+
+        // users related api
+        app.post('/users', async (req, res) => {
+            const userInfo = req.body;
+            const query = { email: userInfo.email };
+
+            const existingUser = await usersCollection.findOne(query);
+            if (existingUser) {
+                return res.send({ message: 'User already exists' });
+            }
+
+            const result = await usersCollection.insertOne(userInfo);
+            res.send(result);
         });
 
     }
