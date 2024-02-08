@@ -24,6 +24,7 @@ async function run() {
     try {
         const servicesCollection = client.db('creativeAgency').collection('services');
         const usersCollection = client.db('creativeAgency').collection('users');
+        const ordersCollection = client.db('creativeAgency').collection('orders');
 
         // services related api
         app.get('/services', async (req, res) => {
@@ -46,6 +47,26 @@ async function run() {
             const result = await usersCollection.insertOne(userInfo);
             res.send(result);
         });
+
+
+        // orders related api
+        app.post('/orders', async (req, res) => {
+            const orderInfo = req.body;
+            const result = await ordersCollection.insertOne(orderInfo);
+            res.send(result);
+        });
+
+        app.get('/orders', async (req, res) => {
+            const email = req.query.email;
+            if (!email) {
+                res.send([]);
+            }
+
+            const query = { email: email };
+            const result = await ordersCollection.find(query).toArray();
+            res.send(result);
+        });
+
 
     }
     finally { }

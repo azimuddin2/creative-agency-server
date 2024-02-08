@@ -28,5 +28,11 @@
         "name": "UI/UX Design",
         "price": 250,
         "description": "With well written codes, we build amazing apps for all platforms, mobile and web apps in general."
+    },
+    {
+        "image": "https://i.ibb.co/0yJy3bB/service6.png",
+        "name": "Responsive Web Design",
+        "price": 400,
+        "description": "With well written codes, we build amazing apps for all platforms, mobile and web apps in general."
     }
 ]
