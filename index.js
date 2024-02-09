@@ -25,6 +25,7 @@ async function run() {
         const servicesCollection = client.db('creativeAgency').collection('services');
         const usersCollection = client.db('creativeAgency').collection('users');
         const ordersCollection = client.db('creativeAgency').collection('orders');
+        const reviewsCollection = client.db('creativeAgency').collection('reviews');
 
         // services related api
         app.get('/services', async (req, res) => {
@@ -66,6 +67,20 @@ async function run() {
             const result = await ordersCollection.find(query).toArray();
             res.send(result);
         });
+
+
+        // review related api
+        app.post('/reviews', async (req, res) => {
+            const reviewInfo = req.body;
+            const result = await reviewsCollection.insertOne(reviewInfo);
+            res.send(result);
+        });
+
+        app.get('/reviews', async (req, res) => {
+            const query = {};
+            const reviews = await reviewsCollection.find(query).toArray();
+            res.send(reviews);
+        })
 
 
     }
