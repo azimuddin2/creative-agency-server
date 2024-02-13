@@ -123,6 +123,26 @@ async function run() {
             res.send(result);
         });
 
+        app.put('/users/:email', verifyJWT, async (req, res) => {
+            const email = req.params.email;
+            const filter = { email: email };
+            const updateProfileData = req.body;
+            const { image, name, country, education, skill } = updateProfileData;
+
+            const options = { upsert: true };
+            const updateDoc = {
+                $set: {
+                    image,
+                    name,
+                    country,
+                    education,
+                    skill
+                },
+            };
+            const result = await usersCollection.updateOne(filter, updateDoc, options);
+            res.send(result);
+        });
+
 
         // services related api
         app.get('/services', async (req, res) => {
@@ -147,8 +167,8 @@ async function run() {
         app.put('/services/:id', verifyJWT, verifyAdmin, async (req, res) => {
             const id = req.params.id;
             const filter = { _id: new ObjectId(id) };
-            const updataServiceData = req.body;
-            const { image, name, price, description } = updataServiceData;
+            const updateServiceData = req.body;
+            const { image, name, price, description } = updateServiceData;
 
             const options = { upsert: true };
             const updateDoc = {
