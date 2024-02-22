@@ -69,14 +69,6 @@ async function run() {
         };
 
 
-        // services related api
-        app.get('/services', async (req, res) => {
-            const query = {};
-            const services = await servicesCollection.find(query).toArray();
-            res.send(services);
-        });
-
-
         // users related api
         app.post('/users', async (req, res) => {
             const userInfo = req.body;
@@ -128,6 +120,20 @@ async function run() {
             const id = req.params.id;
             const query = { _id: new ObjectId(id) };
             const result = await usersCollection.deleteOne(query);
+            res.send(result);
+        });
+
+
+        // services related api
+        app.get('/services', async (req, res) => {
+            const query = {};
+            const services = await servicesCollection.find(query).toArray();
+            res.send(services);
+        });
+
+        app.post('/services', verifyJWT, verifyAdmin, async (req, res) => {
+            const serviceInfo = req.body;
+            const result = await servicesCollection.insertOne(serviceInfo);
             res.send(result);
         });
 
