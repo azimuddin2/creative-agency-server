@@ -144,6 +144,25 @@ async function run() {
             res.send(result);
         });
 
+        app.put('/services/:id', verifyJWT, verifyAdmin, async (req, res) => {
+            const id = req.params.id;
+            const filter = { _id: new ObjectId(id) };
+            const updataServiceData = req.body;
+            const { image, name, price, description } = updataServiceData;
+
+            const options = { upsert: true };
+            const updateDoc = {
+                $set: {
+                    image: image,
+                    name: name,
+                    price: parseInt(price),
+                    description: description
+                },
+            };
+            const result = await servicesCollection.updateOne(filter, updateDoc, options);
+            res.send(result);
+        });
+
 
         // orders related api
         app.post('/orders', async (req, res) => {
