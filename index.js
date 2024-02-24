@@ -219,7 +219,25 @@ async function run() {
             const query = {};
             const reviews = await reviewsCollection.find(query).toArray();
             res.send(reviews);
-        })
+        });
+
+
+        // admin stats api
+        app.get('/admin-stats', verifyJWT, verifyAdmin, async (req, res) => {
+            const payments = await ordersCollection.find().toArray();
+            const revenue = payments.reduce((sum, payment) => sum + payment.price, 0)
+
+            const users = await usersCollection.estimatedDocumentCount();
+            const services = await servicesCollection.estimatedDocumentCount();
+            const orders = await ordersCollection.estimatedDocumentCount();
+
+            res.send({
+                revenue,
+                users,
+                services,
+                orders
+            });
+        });
 
 
     }
